@@ -1,74 +1,62 @@
 import React, {Component} from 'react'
 import ReactPaginate from 'react-paginate';
-import axios from '../../../node_modules/axios'
+
 
 import './index.css'
 import AdminItem from '../AdminItem';
 
 export default class Sample extends Component {
     
-    constructor(props) {
-        super(props);
-        this.state = {
-            offset: 0,
-            data: [],
-            perPage: 10,
-            currentPage: 0
-        };
-        this.handlePageClick = this
-            .handlePageClick
-            .bind(this);
-}
+    
+    state = {
+        offset: 0,
+        perPage: 10,
+        currentPage: 0
+    }; 
 
+    
 
-componentDidMount() {
-        this.receivedData()
+    deleteUser = id => {
+        // const {teamPlayers} = this.state.teamPlayers
+        // teamPlayers.filter(i => i.idTeam !== id)
+        let {adminData} = this.props 
+        // let filteredUsersData =  adminData.splice(id-1,1);
+        // filteredUsersData = [...filteredUsersData]
+        const filteredUsersData = adminData.filter(
+
+          each => parseInt(each.id, 10) !== parseInt(id, 10)
+        
+          
+        ) 
+
+        console.log(filteredUsersData)
+        
+          adminData = filteredUsersData
+         
+        
+        
+        
+      } 
+        
+
+    handlePageClick = (e) => {
+        const selectedPage = e.selected;
+        const {perPage} = this.state
+        const offset = selectedPage * perPage;
+
+        this.setState({
+             offset
+        });
+
     }
-
-handlePageClick = (e) => {
-    const selectedPage = e.selected;
-    const {perPage} = this.state
-    const offset = selectedPage * perPage;
-
-    this.setState({
-        currentPage: selectedPage,
-         offset
-    }, () => {
-        this.receivedData()
-    });
-
-};
-
-receivedData(){
-    const{adminData} = this.props 
-    
-   
-    
-    // axios
-    //  .get(apiUrl)
-    //     .then(res => {
-
-                const data = adminData;
-               
-
-                const {offset,perPage} = this.state
-                const slice = data.slice(offset, offset + perPage)
-                const postData = slice.map(pd => <>
-                    <AdminItem key={pd.id} admin={pd} />
-                </>)
-
-                this.setState({
-                    pageCount: Math.ceil(data.length / perPage),
-
-                    postData
-                })
-            
-    }
-    
-
     
     render() {
-        const{postData, pageCount} = this.state
+        const{ offset,perPage} = this.state
+        const{adminData} = this.props 
+        const slice = adminData.slice(offset, offset + perPage)
+        const postData = slice.map(pd => <> 
+            <AdminItem key={pd.id} admin={pd} deleteUser={this.deleteUser} />
+        </>)
         return (
             <div>
                 {postData}
@@ -77,7 +65,7 @@ receivedData(){
                     nextLabel="next"
                     breakLabel="..."
                     breakClassName="break-me"
-                    pageCount={pageCount}
+                    pageCount={Math.ceil(adminData.length / perPage)}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={this.handlePageClick}

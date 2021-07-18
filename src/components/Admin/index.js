@@ -11,19 +11,20 @@ class Admin extends Component {
   state = {
     adminData: [],
     searchInput: '',
+    filteredData:[]
   }
 
   componentDidMount() {
     this.getAdminData()
   } 
-
-
-  
-
   
   onChangeSearchInput = event => {
     this.setState({searchInput: event.target.value}, this.getAdminData)
-  }
+  } 
+
+  
+
+  
  
   renderSearchInput = () => {
     const {searchInput} = this.state
@@ -55,15 +56,15 @@ class Admin extends Component {
   )
 
   renderAdmin = () => {
-    const {adminData} = this.state
+    const {filteredData} = this.state
     
-    console.log(`AdminData: ${adminData}`)
+    console.log(`AdminData: ${filteredData}`)
 
     return (
       <div className="admin-list">
         {this.renderHeader()}
         <ul className="list-body">
-          <Sample  adminData = {adminData}/>
+          <Sample  adminData = {filteredData} />
         </ul>
       </div>
     )
@@ -74,31 +75,33 @@ class Admin extends Component {
   
 
   getAdminData = async () => {
-    const { searchInput} = this.state;
-    const response = await fetch(apiUrl)
-    const fetchedData = await response.json()
-    
-    
-    const filteredData = fetchedData.filter(value => 
-       
-      (
-        
-       value.name.toLowerCase().includes(searchInput.toLowerCase()) ||
-       value.email.toLowerCase().includes(searchInput.toLowerCase()) ||
-       value.role.toLowerCase().includes(searchInput.toLowerCase())
-     )
-   ); 
+    const { searchInput,adminData} = this.state;
 
-   
-   
+    if(adminData.length){
+
+      const filteredData = adminData.filter(value => 
+         
+        (
+          
+         value.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+         value.email.toLowerCase().includes(searchInput.toLowerCase()) ||
+         value.role.toLowerCase().includes(searchInput.toLowerCase())
+       )
+     ); 
+      
+     this.setState({
+        filteredData
+      })
+   }else{
+
+      const response = await fetch(apiUrl)
+      const fetchedData = await response.json()
+      this.setState({
+        adminData: fetchedData,
+        filteredData:fetchedData
+      })
+   }
     
-   this.setState({
-    adminData: filteredData
-    
-  } )
-  
-    
-   
     
     
   }
