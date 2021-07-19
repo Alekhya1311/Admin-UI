@@ -5,7 +5,7 @@ import ReactPaginate from 'react-paginate';
 import './index.css'
 import AdminItem from '../AdminItem';
 
-export default class Sample extends Component {
+export default class Pagenation extends Component {
     
     
     state = {
@@ -16,28 +16,7 @@ export default class Sample extends Component {
 
     
 
-    deleteUser = id => {
-        // const {teamPlayers} = this.state.teamPlayers
-        // teamPlayers.filter(i => i.idTeam !== id)
-        let {adminData} = this.props 
-        // let filteredUsersData =  adminData.splice(id-1,1);
-        // filteredUsersData = [...filteredUsersData]
-        const filteredUsersData = adminData.filter(
-
-          each => parseInt(each.id, 10) !== parseInt(id, 10)
-        
-          
-        ) 
-
-        console.log(filteredUsersData)
-        
-          adminData = filteredUsersData
-         
-        
-        
-        
-      } 
-        
+    
 
     handlePageClick = (e) => {
         const selectedPage = e.selected;
@@ -52,13 +31,15 @@ export default class Sample extends Component {
     
     render() {
         const{ offset,perPage} = this.state
-        const{adminData} = this.props 
-        const slice = adminData.slice(offset, offset + perPage)
+        const{adminData, deleteUser, selectId, unSelect} = this.props 
+        const slice = adminData.slice(offset, offset + perPage) 
+
         const postData = slice.map(pd => <> 
-            <AdminItem key={pd.id} admin={pd} deleteUser={this.deleteUser} />
+            <AdminItem key={pd.id} admin={pd} deleteUser={deleteUser} selectId = {selectId} unSelect = {unSelect}/>
         </>)
         return (
-            <div>
+            <div> 
+                
                 {postData}
                 <ReactPaginate
                     previousLabel="prev"

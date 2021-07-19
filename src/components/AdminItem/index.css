@@ -1,21 +1,28 @@
-.item-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 
 .admin-item-container {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   background-color: black;
   padding: 8px;
   padding-left: 24px;
-  padding-right: 24px;
+    padding-right: 24px;
+} 
+
+
+@media (min-width: 576px) {
+  .admin-item-container {
+    
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
 
 .checkbox-item {
   width: 16px;
   height: 16px;
+  margin-top: 12px;
   
 }
 
@@ -23,21 +30,28 @@
   .checkbox-item {
     width: 23px;
     height: 23px;
-    margin-right: 200px;
+    margin-left: 20px;
+    margin-right: 50px;
+    
+    
   }
 }
 
 .admin-name {
   color: #ffffff;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 500; 
+  
+ 
+ 
   
 }
 
 @media (min-width: 576px) {
   .admin-name {
     font-size: 16px;
-    margin-right: 100px;
+    margin-left: 50px;
+    
   }
 }
 
@@ -45,6 +59,7 @@
   color: #ffffff;
   font-size: 16px;
   font-weight: 500;
+  text-align: left;
   
 
 }
@@ -53,7 +68,7 @@
   .admin-email {
     font-size: 16px;
     margin-left: 50px;
-    margin-right: 100px;
+    margin-right: 80px;
     
     
   }
@@ -63,6 +78,7 @@
   color: #ffffff;
   font-size: 16px;
   font-weight: 500;
+  text-align: left;
   
 }
 
@@ -79,6 +95,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-top: 15px;
 } 
 
 .edit {
