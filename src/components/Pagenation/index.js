@@ -21,24 +21,27 @@ export default class Pagenation extends Component {
     handlePageClick = (e) => {
         const selectedPage = e.selected;
         const {perPage} = this.state
+        const {setCurrentPage} = this.props
         const offset = selectedPage * perPage;
-
+        
         this.setState({
              offset
+        }, () => {
+            setCurrentPage(selectedPage)
         });
 
     }
     
     render() {
         const{ offset,perPage} = this.state
-        const{adminData, deleteUser, selectId, unSelect} = this.props 
+        const{adminData, deleteUser, selectId, unSelect, toggleSelection} = this.props 
         const slice = adminData.slice(offset, offset + perPage) 
         // slice.map((each) => {
         //     return (<CheckBox {...each} />)
         //   })
 
         const postData = slice.map(pd => <> 
-            <AdminItem key={pd.id} admin={pd} deleteUser={deleteUser} selectId = {selectId} unSelect = {unSelect}/>
+            <AdminItem key={pd.id} admin={pd} deleteUser={deleteUser} selectId = {selectId} unSelect = {unSelect} toggleSelection={toggleSelection}/>
         </>)
         return (
             <div> 

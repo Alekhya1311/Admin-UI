@@ -14,7 +14,9 @@ class Admin extends Component {
     searchInput: '',
     filteredData:[], 
     
-    selectIds : []
+    selectIds : [],
+    multipleSelect:false,
+    currentPage:0
   }
 
   componentDidMount() {
@@ -48,7 +50,7 @@ class Admin extends Component {
   deleteSelected = () => {
     const {selectIds, filteredData} = this.state 
 
-    const data = filteredData.filter(each => !selectIds.includes(each.id))
+    const data = filteredData.filter(each => !each.selected)
 
     this.setState({filteredData: data , selectIds : []})
 
@@ -108,24 +110,33 @@ class Admin extends Component {
     this.setState({selectIds: filteredSelectId})
   }  
 
+  toggleSelection = (id) => {
+    const { filteredData} = this.state 
+    const index = filteredData.findIndex(each => each.id === id)
+    filteredData[index].selected = !filteredData[index].selected
+    this.setState({filteredData})
+  }
+
   
 
 
-  // onSelectMultiple = (event) => {
+  onSelectMultiple = (event) => {
     
-  //   const {target} = event 
-  //   if (target.checked === true) {
-       
+    const {target} = event 
+    const {filteredData,currentPage} = this.state
+    
+    // currentPage
+    for (let i = currentPage*10; i < (currentPage*10+10); i=i+1) {
+      filteredData[i].selected = target.checked
+    }
         
-  //   } else {
-      
-  //   }
+    this.setState({filteredData})
     
-  // }
+  }
 
   renderHeader = () => (
     <div className="list-header">
-      <input className="checkbox-header" type="checkbox" onChange = {this.onSelectMultiple}/>
+      <input className="checkbox-header" type="checkbox" onChange = {this.onSelectMultiple} />
       <p className="list-heading">Name</p>
 
       <p className="list-heading">Email</p>
@@ -133,6 +144,10 @@ class Admin extends Component {
       <p className="list-heading">Actions</p>
     </div>
   )
+
+  setCurrentPage = (page) => {
+    this.setState({currentPage:page})
+  }
 
   renderAdmin = () => {
     const {filteredData} = this.state
@@ -143,7 +158,7 @@ class Admin extends Component {
       <div className="admin-list">
         {this.renderHeader()}
        
-          <Pagenation adminData = {filteredData} deleteUser={this.deleteUser} selectId = {this.selectId} unSelect = {this.unSelect}/>
+          <Pagenation adminData = {filteredData} deleteUser={this.deleteUser} selectId = {this.selectId} unSelect = {this.unSelect} toggleSelection={this.toggleSelection} setCurrentPage={this.setCurrentPage}/>
         
       </div>
     )
@@ -175,6 +190,9 @@ class Admin extends Component {
 
       const response = await fetch(apiUrl)
       const fetchedData = await response.json()
+      for (let i = 0; i < fetchedData.length; i=i+1) {
+        fetchedData[i].selected = false
+      }
       this.setState({
         adminData: fetchedData,
         filteredData:fetchedData
