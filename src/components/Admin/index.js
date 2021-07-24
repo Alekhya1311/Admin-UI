@@ -125,9 +125,9 @@ class Admin extends Component {
   renderHeader = () => (
     <div className="list-header">
       <input className="checkbox-header" type="checkbox" onChange = {this.onSelectMultiple} />
-      <p className="list-heading">Name</p>
+      <p className="list-name">Name</p>
 
-      <p className="list-heading">Email</p>
+      <p className="list-email">Email</p>
       <p className="list-role">Role</p>
       <p className="list-actions">Actions</p>
     </div>

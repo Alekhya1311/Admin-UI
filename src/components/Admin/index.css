@@ -23,18 +23,13 @@
 
 .list-header {
   display: flex;
-  justify-content: space-between;
+  
   background-color: #00e7ff33;
   padding: 8px;
   
 }
 
-@media (min-width: 576px) {
-  .list-header {
-    
-    padding: 10px;
-  }
-}
+
 .checkbox-header {
   width: 16px;
   height: 16px;
@@ -50,7 +45,7 @@
   }
 }
 
-.list-heading {
+.list-name {
   color: #ffffff;
   font-size: 16px;
   font-weight: 500;
@@ -58,8 +53,24 @@
 }
 
 @media (min-width: 576px) {
-  .list-heading {
+  .list-name {
     font-size: 24px;
+    margin-left: 240px;
+   
+  }
+} 
+
+.list-email {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0px;
+}
+
+@media (min-width: 576px) {
+  .list-email {
+    font-size: 24px;
+    margin-left: 300px;
    
   }
 }
@@ -79,6 +90,7 @@
   .list-role {
     font-size: 24px;
     width: 72px;
+    margin-left: 280px;
     
   }
 }  
@@ -97,6 +109,8 @@
   .list-actions {
     font-size: 24px;
     width: 72px;
+    margin-left: 180px;
+    
     
     
   }

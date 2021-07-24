@@ -57,11 +57,11 @@ render() {
 
         {
           editMode ? <input type="text" className = "input" onChange = {this.email} /> : 
-                    <p className="admin-name">{newEmail}</p>
+                    <p className="admin-email">{newEmail}</p>
         }
         {
           editMode ? <input type="text" className = "input" onChange = {this.role} /> : 
-                    <p className="admin-name">{newRole}</p>
+                    <p className="admin-role">{newRole}</p>
         }
         <div className="action-items">
 
