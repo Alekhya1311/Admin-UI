@@ -5,17 +5,15 @@
   justify-content: space-between;
   align-items: flex-start;
   background-color: black;
-  padding: 8px;
-  padding-left: 24px;
-    padding-right: 24px;
+  
 } 
 
 
 @media (min-width: 576px) {
   .admin-item-container {
     
-    padding-left: 40px;
-    padding-right: 40px;
+    
+    padding-left: 10px;
   }
 }
 
@@ -31,7 +29,6 @@
     width: 23px;
     height: 23px;
     margin-left: 20px;
-    margin-right: 50px;
     
     
   }
@@ -50,7 +47,8 @@
 @media (min-width: 576px) {
   .admin-name {
     font-size: 16px;
-    margin-left: 50px;
+    
+    
     
   }
 }
@@ -59,7 +57,7 @@
   color: #ffffff;
   font-size: 16px;
   font-weight: 500;
-  text-align: left;
+  
   
 
 }
@@ -67,8 +65,9 @@
 @media (min-width: 576px) {
   .admin-email {
     font-size: 16px;
-    margin-left: 50px;
-    margin-right: 80px;
+    
+    
+    
     
     
   }
@@ -78,14 +77,16 @@
   color: #ffffff;
   font-size: 16px;
   font-weight: 500;
-  text-align: left;
+  
   
 }
 
 @media (min-width: 576px) {
   .admin-role {
     font-size: 16px;
-    margin-right: 100px;
+    margin-right: 20px;
+    
+   
     
   }
 }
@@ -96,6 +97,7 @@
   justify-content: space-around;
   align-items: center;
   margin-top: 15px;
+  
 } 
 
 .edit {
@@ -108,4 +110,17 @@
   width: 16px;
   height: 16px;
   color: white;
+} 
+
+.input {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  margin-top: 15px;
+  
 }

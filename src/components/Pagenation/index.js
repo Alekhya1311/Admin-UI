@@ -34,14 +34,12 @@ export default class Pagenation extends Component {
     
     render() {
         const{ offset,perPage} = this.state
-        const{adminData, deleteUser, selectId, unSelect, toggleSelection} = this.props 
+        const{adminData, deleteUser, toggleSelection} = this.props 
         const slice = adminData.slice(offset, offset + perPage) 
-        // slice.map((each) => {
-        //     return (<CheckBox {...each} />)
-        //   })
+        
 
         const postData = slice.map(pd => <> 
-            <AdminItem key={pd.id} admin={pd} deleteUser={deleteUser} selectId = {selectId} unSelect = {unSelect} toggleSelection={toggleSelection}/>
+            <AdminItem key={pd.id} admin={pd} deleteUser={deleteUser}  toggleSelection={toggleSelection}/>
         </>)
         return (
             <div> 

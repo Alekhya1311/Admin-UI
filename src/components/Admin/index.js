@@ -14,8 +14,9 @@ class Admin extends Component {
     searchInput: '',
     filteredData:[], 
     
-    selectIds : [],
+  
     multipleSelect:false,
+     
     currentPage:0
   }
 
@@ -48,11 +49,11 @@ class Admin extends Component {
   
 
   deleteSelected = () => {
-    const {selectIds, filteredData} = this.state 
+    const {filteredData} = this.state 
 
     const data = filteredData.filter(each => !each.selected)
 
-    this.setState({filteredData: data , selectIds : []})
+    this.setState({filteredData: data})
 
 
 
@@ -87,28 +88,11 @@ class Admin extends Component {
   } 
 
 
-  checked = () => {
-    
-  } 
+  
 
-  selectId = id => {
-    const {selectIds} = this.state
-     
-       this.setState({selectIds: [...selectIds, id]})
-  }
+  
  
-  unSelect = id => {
-    const {selectIds} = this.state
-    const filteredSelectId = selectIds.filter(
-
-      each => parseInt(each.id, 10) === parseInt(id, 10)
-    
-      
-    )   
-   
-
-    this.setState({selectIds: filteredSelectId})
-  }  
+  
 
   toggleSelection = (id) => {
     const { filteredData} = this.state 
@@ -124,13 +108,17 @@ class Admin extends Component {
     
     const {target} = event 
     const {filteredData,currentPage} = this.state
+
+   
     
-    // currentPage
+    // currentPage 
     for (let i = currentPage*10; i < (currentPage*10+10); i=i+1) {
       filteredData[i].selected = target.checked
-    }
+    } 
+
         
-    this.setState({filteredData})
+    this.setState({filteredData}) 
+    
     
   }
 
@@ -141,7 +129,7 @@ class Admin extends Component {
 
       <p className="list-heading">Email</p>
       <p className="list-role">Role</p>
-      <p className="list-heading">Actions</p>
+      <p className="list-actions">Actions</p>
     </div>
   )
 
@@ -158,7 +146,7 @@ class Admin extends Component {
       <div className="admin-list">
         {this.renderHeader()}
        
-          <Pagenation adminData = {filteredData} deleteUser={this.deleteUser} selectId = {this.selectId} unSelect = {this.unSelect} toggleSelection={this.toggleSelection} setCurrentPage={this.setCurrentPage}/>
+          <Pagenation adminData = {filteredData} deleteUser={this.deleteUser}  toggleSelection={this.toggleSelection} setCurrentPage={this.setCurrentPage}/>
         
       </div>
     )
