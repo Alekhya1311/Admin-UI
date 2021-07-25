@@ -59,9 +59,3 @@ Sample Response:
                     
                 
 
-Take a look at Geektrust help docs for guidance on how to write code that will companies interested in you. All the best!
-
-You should read what we look for in your solution before you start coding.
-
-
-Attribution - This coding problem was created by Arvind Kumar. Three cheers to him! If you wish to submit a coding problem, mail us at problems@geektrust.in
