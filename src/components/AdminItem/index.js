@@ -42,7 +42,7 @@ class AdminItem extends Component {
   }
 
   render() {
-    const {admin, toggleSelection} = this.props
+    const {admin, toggleSelection,changeUserDetails} = this.props
     const {editMode, newName, newEmail, newRole} = this.state
     return (
       <div className="admin-item-container">
@@ -55,18 +55,18 @@ class AdminItem extends Component {
           checked={admin.selected || false}
         />
         {editMode ? (
-          <input type="text" className="input" onChange={this.name} />
+          <input type="text" value = {newName} className="input" onChange={this.name} />
         ) : (
           <p className="admin-name">{newName}</p>
         )}
 
         {editMode ? (
-          <input type="text" className="input" onChange={this.email} />
+          <input type="text" value = {newEmail} className="input" onChange={this.email} />
         ) : (
           <p className="admin-email">{newEmail}</p>
         )}
         {editMode ? (
-          <input type="text" className="input" onChange={this.role} />
+          <input type="text" value = {newRole} className="input" onChange={this.role} />
         ) : (
           <p className="admin-role">{newRole}</p>
         )}
@@ -76,6 +76,7 @@ class AdminItem extends Component {
               className="edit"
               onClick={() => {
                 this.setState({editMode: !editMode})
+                changeUserDetails(newName,newEmail,newRole,admin.id)
               }}
             />
           ) : (

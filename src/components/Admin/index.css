@@ -157,3 +157,13 @@
   color: black;
   background-color: red;
 }
+
+.name-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.sort{
+  color: white;
+  margin-left: 5px;
+}

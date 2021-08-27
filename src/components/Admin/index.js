@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import {BsSearch} from 'react-icons/bs'
+import {AiOutlineArrowUp} from 'react-icons/ai'
 import Pagenation from '../Pagenation'
 
 import './index.css'
@@ -37,7 +38,6 @@ class Admin extends Component {
     const {filteredData} = this.state
 
     const data = filteredData.filter(each => !each.selected)
-
     this.setState({filteredData: data})
   }
 
@@ -86,6 +86,63 @@ class Admin extends Component {
     }
 
     this.setState({filteredData})
+  } 
+
+  sortName = () => {
+    const { filteredData } = this.state
+    const sortedFilteredData = filteredData.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1
+      }if (a.name === b.name) {
+        return 0
+      }
+      
+      return 1
+      
+      
+    }
+    )
+    console.log(sortedFilteredData)
+
+    this.setState({filteredData: sortedFilteredData})
+  }
+
+  sortEmail = () => {
+    const { filteredData } = this.state
+    const sortedFilteredData = filteredData.sort((a, b) => {
+      if (a.email < b.email) {
+        return -1
+      }if (a.email === b.email) {
+        return 0
+      }
+      
+      return 1
+      
+      
+    }
+    )
+    console.log(sortedFilteredData)
+
+    this.setState({filteredData: sortedFilteredData})
+  }
+
+  sortRole = () => {
+    const { filteredData } = this.state
+    const sortedFilteredData = filteredData.sort((a, b) => {
+      if (a.role < b.role) {
+        return -1
+      }if (a.role === b.role) {
+        return 0
+      }
+      
+      return 1
+      
+      
+    }
+    )
+    console.log(sortedFilteredData)
+
+    this.setState({filteredData: sortedFilteredData})
   }
 
   renderHeader = () => (
@@ -95,16 +152,35 @@ class Admin extends Component {
         type="checkbox"
         onChange={this.onSelectMultiple}
       />
+      <div className = "name-container">
       <p className="list-name">Name</p>
-
+      <AiOutlineArrowUp className ="sort" onClick = {this.sortName}/>
+      </div>
+      
+      <div className = "name-container">
       <p className="list-email">Email</p>
+      <AiOutlineArrowUp className ="sort" onClick = {this.sortEmail}/>
+      </div>
+      <div className = "name-container">
       <p className="list-role">Role</p>
+      <AiOutlineArrowUp className ="sort" onClick = {this.sortRole}/>
+      </div>
+      
       <p className="list-actions">Actions</p>
     </div>
   )
 
   setCurrentPage = page => {
     this.setState({currentPage: page})
+  }
+
+  changeUserDetails = (newName,newEmail,newRole,id) => {
+    const{filteredData} = this.state 
+    const userIndex = filteredData.findIndex(each => (id === each.id)) 
+    filteredData[userIndex].name = newName
+    filteredData[userIndex].email = newEmail
+    filteredData[userIndex].role = newRole 
+    this.setState({filteredData})
   }
 
   renderAdmin = () => {
@@ -119,6 +195,7 @@ class Admin extends Component {
           deleteUser={this.deleteUser}
           toggleSelection={this.toggleSelection}
           setCurrentPage={this.setCurrentPage}
+          changeUserDetails = {this.changeUserDetails}
         />
       </div>
     )

@@ -29,7 +29,7 @@ export default class Pagenation extends Component {
 
   render() {
     const {offset, perPage} = this.state
-    const {adminData, deleteUser, toggleSelection} = this.props
+    const {adminData, deleteUser, toggleSelection,changeUserDetails} = this.props
     const slice = adminData.slice(offset, offset + perPage)
 
     const postData = slice.map(pd => (
@@ -38,6 +38,7 @@ export default class Pagenation extends Component {
         admin={pd}
         deleteUser={deleteUser}
         toggleSelection={toggleSelection}
+        changeUserDetails = {changeUserDetails}
       />
     ))
     return (
@@ -46,15 +47,14 @@ export default class Pagenation extends Component {
         <ReactPaginate
           previousLabel="prev"
           nextLabel="next"
-          breakLabel="..."
-          breakClassName="break-me"
           pageCount={Math.ceil(adminData.length / perPage)}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
           onPageChange={this.handlePageClick}
           containerClassName="pagination"
-          subContainerClassName="pages pagination"
-          activeClassName="active"
+          previousLinkClassName="pagination__link"
+          nextLinkClassName="pagination__link"
+          activeClassName="pagination__link--active"
         />
       </div>
     )
